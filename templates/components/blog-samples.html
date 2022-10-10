@@ -1,0 +1,33 @@
+{%if latest_posts %}
+<section class="container blog-sample mb-4">
+    <h4>Recent From Our Blog</h4>
+    <div class="row justify-content-center pb-4 pt-4" style="gap: 24px;">
+        {% for post in latest_posts %}
+        <div class="card col-md" style=" padding:0">
+            <div class="card-image " style="height: 15rem">
+                <img src="{{post.cover_image.url}}" alt="">
+            </div>
+            <div class="card-body">
+                <h5 class="card-tile">{{ post.title|title }}</h5>
+                <p class="card-text">{{ post.post|truncatewords:15 }}</p>
+            </div>
+            <div class="date p-2">
+                <small class="day">{{ post.date_created | date:'d'}}</small>
+                <strong class="month">{{post.date_created |date:'F'}}</strong>
+                <small class="year">{{ post.date_created | date:'Y'}}</small>
+            </div>
+
+            <div class="bottom m-2 ">
+                <a href="{%url 'post_detail' post.id%}"> <button class="btn bg-light">read more <i
+                            class="bi bi-arrow-right"></i></button></a>
+                <small class="author text-muted">{{ post.user }}</small>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+    </div>
+
+</section>
+{% endif %}

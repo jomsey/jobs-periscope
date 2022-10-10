@@ -1,0 +1,128 @@
+{% extends '../base.html'%} {% block title %} {{post.title}} {% endblock title %} {% block content %}
+<section class="blog-detail mt-5 mb-5 container">
+
+    <article>
+        <h1 class="mb-2">{{post.title |title}}</h1>
+        <small>{{ post.date_created | date:'d'}} {{ post.date_created | date:'F'}}
+            {{post.date_created|date:'Y'}}</small>
+        <img src="{{post.cover_image.url}}" alt="" class="cover-image">
+        <div class="post-content pt-4">
+            <div class="author-bio p-4">
+                <div class="avatar bg-dark mb-4"><img src="{{post.user.profile_pic.url}}" alt=""></div>
+                <small class="text-muted">By:</small> <span style="color:#ff436c">{{post.user.username}}</span>
+                <hr>
+                <div class="social-pack">
+                    <i class="bi bi-facebook"></i>
+                    <i class="bi bi-linkedin"></i>
+                    <i class="bi bi-twitter"></i>
+                </div>
+                <p class="pt-4" style="color: #ff436e;font-size:.93rem">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt quis repellendus eum quasi repellat eius alias voluptates voluptate officia odit?</p>
+            </div>
+
+            <div class="text">
+                {{post.post|safe|linebreaks}}
+            </div>
+
+        </div>
+    </article>
+    <aside class="p-4">
+        <div class="share-box">
+            <h3>Share On Social Media</h3>
+            <div class="social-pack">
+                <i class="bi bi-facebook"></i>
+                <i class="bi bi-linkedin"></i>
+                <i class="bi bi-twitter"></i>
+            </div>
+        </div>
+        <div class="aside-articles mt-4">
+            <h2>Top Posts</h2>
+            <a href="#" class="text-dark">
+                <div class="aside-article">
+                    <div class="thumbnail">
+                        <img src="http://127.0.0.1:8000/media/post_covers/1ab089aaf438547bc56b14d3e597807d.jpg" alt="">
+                    </div>
+                    <div class="m-2">
+                        <span class="article-heading">Lorem ipsum dolor sit amet consectetur.</span>
+                        <small class="mt-2">20 January 2020</small>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="text-dark">
+                <div class="aside-article">
+                    <div class="thumbnail">
+                        <img src="http://127.0.0.1:8000/media/post_covers/1ab089aaf438547bc56b14d3e597807d.jpg" alt="">
+                    </div>
+                    <div class="m-2">
+                        <span class="article-heading">Lorem ipsum dolor sit amet consectetur.</span>
+                        <small class="mt-2 text-muted">20 January 2020</small>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="text-dark">
+                <div class="aside-article">
+                    <div class="thumbnail">
+                        <img src="http://127.0.0.1:8000/media/post_covers/1ab089aaf438547bc56b14d3e597807d.jpg" alt="">
+                    </div>
+                    <div class="m-2">
+                        <span class="article-heading">Lorem ipsum dolor sit amet consectetur.</span>
+                        <small class="mt-2">20 January 2020</small>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="text-dark">
+                <div class="aside-article">
+                    <div class="thumbnail">
+                        <img src="http://127.0.0.1:8000/media/post_covers/1ab089aaf438547bc56b14d3e597807d.jpg" alt="">
+                    </div>
+                    <div class="m-2">
+                        <span class="article-heading">Lorem ipsum dolor sit amet consectetur.</span>
+                        <small class="mt-2">20 January 2020</small>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="text-dark">
+                <div class="aside-article">
+                    <div class="thumbnail">
+                        <img src="http://127.0.0.1:8000/media/post_covers/1ab089aaf438547bc56b14d3e597807d.jpg" alt="">
+                    </div>
+                    <div class="m-2">
+                        <span class="article-heading">Lorem ipsum dolor sit amet consectetur.</span>
+                        <small class="mt-2">20 January 2020</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="adverts-space">
+            <div class="advert">
+                <img src="https://i.pinimg.com/564x/90/c7/a6/90c7a6b46a35e461e63d4ca4bd2dbc82.jpg" alt="">
+            </div>
+        </div>
+    </aside>
+
+</section>
+<section class="comments-section  container mb-4">
+    {% if comments %}
+    <h4 class="text-secondary mb-4 " style="overflow:hidden"> <i class="bi bi-chat-square"></i> Comments {{comments|length}}
+    </h4>
+    {% for comment in comments %}
+    <div class="comment m-2">
+        <div class="avatar bg-dark"><img src="{{comment.user.profile_pic.url}}" alt=""></div>
+        <div class="left ">
+            <div><strong>{{comment.user}}</strong><small> {{comment.date_created|timesince}}
+                    ago</small></div>
+            <p>{{comment.comment}}</p>
+        </div>
+    </div>
+    {% endfor %} {% endif %}
+    <h5 class="text-secondary mt-4">Leave a comment</h5>
+    <form method="post">
+        {%csrf_token%} {{form.comment}}
+        <br>
+        <button type="submit" class="btn mt-2">SUBMIT</button>
+    </form>
+</section>
+{% endblock content %}

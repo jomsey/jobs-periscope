@@ -1,0 +1,33 @@
+<section class="bg-dark container-fluid pb-4">
+    <div class="footer container pt-4 mt-5 pb-5">
+        <div class="contacts">
+            <h5 class="text-light">Our Contacts</h5>
+        </div>
+        <div class="footer-page-links">
+            <h5 class="text-light">Page Links</h5>
+            <a href="">
+                <p class="nav-link"><i class="bi bi-arrow-right"></i>Home</p>
+            </a>
+            <a href="">
+                <p class="nav-link"><i class="bi bi-arrow-right"></i>Jobs</p>
+            </a>
+            <a href="">
+                <p class="nav-link"><i class="bi bi-arrow-right"></i>Blog</p>
+            </a>
+            <a href="">
+                <p class="nav-link"><i class="bi bi-arrow-right"></i>Blog</p>
+            </a>
+        </div>
+        <div class="subscribe-form" data-aos="fade-left">
+            <h5 class="text-light">Subscribe To Our Newsletter</h5>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus repudiandae facere saepe nemo.</p>
+            <form method="post">
+                {%csrf_token%}
+                <input type="email" name="email" placeholder="enter your email">
+                <button>Subscribe</button>
+            </form>
+        </div>
+    </div>
+    <small class=" text-muted text-center m-2" style="display:block"><strong>&copy muwanguzi joseph
+            2022</strong></small>
+</section>

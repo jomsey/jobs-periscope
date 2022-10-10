@@ -1,0 +1,13 @@
+<div class="landing">
+    <div class="landing-overlay overlay bg-dark"></div>
+    <div class="landing-content">
+        <h1 class="text-center text-light">Find Your Dream Job</h1>
+        <form method="post">
+            {%csrf_token%}
+            <div class="form-items-group mt-5">
+                <input type="text" class="text-light" placeholder="search job title" name="job">
+                <button type="submit" class="text-light">SEARCH</button>
+            </div>
+        </form>
+    </div>
+</div>
