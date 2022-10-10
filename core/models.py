@@ -4,10 +4,10 @@ from django.conf import settings
 
 class SiteUser(AbstractUser):
     GENDER_CHOICES = (("M","Male"),("F","Female"))
-    phone_number = models.CharField(max_length=15)
+    phone_number = models.CharField(max_length=15,null=True)
     birthday = models.DateField(null=True)
-    nationality = models.CharField(max_length=15)
-    gender = models.CharField(max_length=1,choices=GENDER_CHOICES)
+    nationality = models.CharField(max_length=15,null=True)
+    gender = models.CharField(max_length=1,choices=GENDER_CHOICES,null=True)
     profile_pic = models.ImageField(upload_to="profile_pics",default="avatar.jpg")
     biography = models.TextField()
     

@@ -1,5 +1,5 @@
 {% extends '../base.html'%} {% block title %} login {% endblock title %} {% block content %}
-<div class="container login-container p-5">
+<div class="container auth-container p-5">
     <h1 class="text-center mb-5">Sign in</h1>
     <form method="post" class="card p-4 pt-5">
         {%csrf_token%}
@@ -12,7 +12,8 @@
             <i class="bi bi-google "></i>
             <i class="bi bi-twitter "></i>
         </div>
-        <span class="text-center text-muted mt-4">Don't have account?<a href="">Register Here</a></span>
+        <span class="text-center text-muted mt-4">Don't have account?<a href="{%url 'register'%}">Register
+                Here</a></span>
     </form>
 
 </div>
