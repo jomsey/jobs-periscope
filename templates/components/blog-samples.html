@@ -1,33 +1,35 @@
 {%if latest_posts %}
-<section class="container blog-sample mb-4">
-    <h4>Recent From Our Blog</h4>
-    <div class="row justify-content-center pb-4 pt-4" style="gap: 24px;">
-        {% for post in latest_posts %}
-        <div class="card col-md" style=" padding:0">
-            <div class="card-image " style="height: 15rem">
-                <img src="{{post.cover_image.url}}" alt="">
-            </div>
-            <div class="card-body">
-                <h5 class="card-tile">{{ post.title|title }}</h5>
-                <p class="card-text">{{ post.post|truncatewords:15 }}</p>
-            </div>
-            <div class="date p-2">
-                <small class="day">{{ post.date_created | date:'d'}}</small>
-                <strong class="month">{{post.date_created |date:'F'}}</strong>
-                <small class="year">{{ post.date_created | date:'Y'}}</small>
+<section class="container-fluid  blog-sample pb-4 mt-4 pt-4" style="background-color:rgb(243, 241, 241); background-image: url(https://www.transparenttextures.com/patterns/foggy-birds.png);">
+    <div class="container">
+        <h4 class="ml-4 mb-4">Recent From Our Blog</h4>
+        <div class="row justify-content-center m-4" style="gap: 42px;">
+            {% for post in latest_posts %}
+            <div class="card col-md" style=" padding:0">
+                <div class="card-image " style="height: 15rem">
+                    <img src="{{post.cover_image.url}}" alt="">
+                </div>
+                <div class="card-body ">
+                    <h5 class="card-tile">{{ post.title|title }}</h5>
+                    <p class="card-text text-muted">{{ post.post|safe|truncatewords:10 }}</p>
+                </div>
+                <div class="date p-2">
+                    <small class="day">{{ post.date_created | date:'d'}}</small>
+                    <strong class="month">{{post.date_created |date:'F'}}</strong>
+                    <small class="year">{{ post.date_created | date:'Y'}}</small>
+                </div>
+
+                <div class="bottom  ">
+                    <a href="{%url 'post_detail' post.id%}"> <button class="btn bg-light">read more <i
+                                class="bi bi-arrow-right"></i></button></a>
+
+
+                </div>
+
             </div>
 
-            <div class="bottom m-2 ">
-                <a href="{%url 'post_detail' post.id%}"> <button class="btn bg-light">read more <i
-                            class="bi bi-arrow-right"></i></button></a>
-                <small class="author text-muted">{{ post.user }}</small>
-
-            </div>
-
+            {% endfor %}
         </div>
 
-        {% endfor %}
     </div>
-
 </section>
 {% endif %}

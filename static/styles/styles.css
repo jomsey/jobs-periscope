@@ -16,6 +16,8 @@
 
 body {
     background-color: #fff;
+    max-width: 1500px;
+    margin: 0 auto;
 }
 
 a {
@@ -23,7 +25,7 @@ a {
 }
 
 p {
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 img {
@@ -129,6 +131,7 @@ h3,
 h5,
 h6 {
     overflow-x: visible;
+    color: var(--black-shade);
 }
 
 .double {
@@ -187,6 +190,18 @@ h6 {
     font-size: 1rem;
 }
 
+.blog-sample h4 {
+    left: 20px;
+}
+
+.blog-sample h4::before {
+    content: "";
+    padding: 2px;
+    height: 20px;
+    background-color: var(--primary);
+    margin-right: 8px;
+}
+
 .blog-sample .date {
     background-color: var(--primary);
     display: flex;
@@ -212,7 +227,7 @@ h6 {
 .footer {
     display: grid;
     gap: 24x;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .footer h5 {

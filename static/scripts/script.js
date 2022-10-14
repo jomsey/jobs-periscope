@@ -1,16 +1,41 @@
-new numberRush('numberOne', {
-    speed: 3,
-    steps: 10,
-    maxNumber: 2023
-})
+$(".owl-carousel").owlCarousel({
+  loop: true,
+  margin: 24,
 
-new numberRush('numberTwo', {
-    speed: 5,
-    steps: 1,
-    maxNumber: 600
-})
+  autoplay: true,
+  autoplayTimeout: 3000,
+  responsive: {
+    0: {
+      items: 1,
+    },
+    600: {
+      items: 2,
+    },
+    1000: {
+      items: 3,
+    },
+  },
+});
 
-new numberRush('numberThree', {
-    speed: 8,
-    steps: 1,
-})
+AOS.init({
+  duration: 700,
+});
+
+// Number rush configurations
+new numberRush("jobs", {
+  speed: 4,
+  maxNumber: 120,
+});
+new numberRush("employers", {
+  speed: 3,
+  maxNumber: 1000,
+});
+new numberRush("people", {
+  speed: 3,
+  steps: 5,
+  maxNumber: 2200,
+});
+new numberRush("companies", {
+  speed: 3,
+  maxNumber: 40,
+});
