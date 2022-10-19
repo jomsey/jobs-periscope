@@ -8,11 +8,12 @@ from core.form import PostCommentForm, UserRegisterForm
 from core import models
 
 class IndexView(View):
+    template ='pages/index.html'
     def get(self,request):
         latest_posts = models.Post.objects.order_by('-date_created')[:3]
         context={'latest_posts':latest_posts}
-        template ='pages/index.html'
-        return render(request,template,context=context)
+       
+        return render(request,self.template,context=context)
     
     def post(self,request):
         return HttpResponse("OK")
@@ -25,12 +26,21 @@ class USerProfileView(LoginRequiredMixin,DetailView):
    
 
 class JobDetailView(DetailView):
-    def get(self,request):
-        return HttpResponse("Job Detail")
+    def get(self,request,name):
+        return HttpResponse(name)
 
 class JobsListView(ListView):
-    def get(self,request):
-        return HttpResponse("Jobs List")
+    model=models.Job
+    context_object_name="jobs"
+    template_name="pages/jobs.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['job_categories']=models.JobCategory.objects.all()
+        return context
+    
+
+   
 class PostsListView(ListView):
     pass
 
@@ -56,7 +66,7 @@ class PostDetailView(DetailView):
                  new_comment = models.PostComments(user=user,comment=comment,post=post)
                  new_comment.save()
                  messages.success(request,"success")
-            messages.info(request,"please sign in to comment")
+            return redirect("login")
         return redirect("post_detail",kwargs.get("pk") )
     
     

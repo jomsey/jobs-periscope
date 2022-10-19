@@ -1,0 +1,33 @@
+{%extends '../base.html'%} {% block title %} jobs for you {% endblock title %} {% block content %}
+<div class=" row m-5">
+    <aside class="col-md-2">
+        <span><i class="bi bi-filter mb-4">Filter & Refine</i></span>
+        <div>
+            <span>Job Categories</span>
+            <ul>
+                {% for c in job_categories %}
+                <li>
+                    <small><a href="{%url 'job_details' c%}">{{c}}</a></small>
+                </li> {% endfor %}
+            </ul>
+        </div>
+
+
+    </aside>
+    <main class="col-md-10">
+        {% for job in jobs %}
+        <div class="card p-4 m-4">
+
+            <small class="text-muted ">{{job.category}}</small>
+            <h6>{{job.title}}</h6>
+            {% if job.is_expired %}
+            <span class="badge  bg-warning">Expired</span>{% else %}
+            <small class="text-muted">Application Deadline {{job.expiring_date}}</small> {% endif %}
+
+
+        </div>
+        {% endfor %}
+
+    </main>
+</div>
+{% endblock content %}

@@ -9,15 +9,31 @@
 :root {
     --gray: #e8e8e8;
     --gray-shade: rgb(136, 136, 136);
-    --primary: #f01444;
+    --primary: rgb(53, 201, 53);
     --black-shade: rgb(64, 65, 65);
-    --primary-shade: rgb(255, 245, 245);
+    --primary-shade: rgb(227, 255, 227);
 }
 
 body {
+    scroll-behavior: smooth;
     background-color: #fff;
     max-width: 1500px;
     margin: 0 auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-x: visible;
+    color: rgb(172, 9, 158);
+}
+
+.post-h {
+    color: rgb(238, 1, 218);
+    font-size: medium;
 }
 
 a {
@@ -25,7 +41,17 @@ a {
 }
 
 p {
-    font-size: 1rem;
+    font-size: 1.1rem;
+}
+
+.w-70 {
+    width: 70% !important;
+}
+
+.p-limit {
+    min-width: 320px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 img {
@@ -34,21 +60,35 @@ img {
     object-fit: cover;
 }
 
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 400;
+    color: var(--primary);
+    font-size: 3rem;
+    transition: all 0.2s ease;
+}
+
 .nav-link {
     color: var(--primary);
 }
 
 .landing {
     width: 100%;
-    height: 85vh;
+    height: 100vh;
     min-height: 320px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-repeat: no-repeat;
-    background-position: center;
     background-size: cover;
-    background-image: url(https://cdn.pixabay.com/photo/2015/02/02/11/08/office-620817_960_720.jpg);
+    background-image: url(https://nevadasmallbusiness.com/wp-content/uploads/2016/04/Keep-Up-Team-Motivation.jpg);
+}
+
+h2 {
+    font-size: 2.5rem;
+    font-weight: 400;
 }
 
 .overlay {
@@ -58,15 +98,39 @@ img {
     opacity: 0.7;
 }
 
+.landing .overlay {
+    background-image: linear-gradient( to right, black, var(--black-shade), transparent);
+}
+
 .landing .landing-content {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+.landing a {
+    margin-top: 80px;
+    position: absolute;
+    bottom: 30px;
+}
+
+.landing a:hover i {
+    color: rgb(53, 201, 53) !important;
+}
+
+.landing a i {
+    font-size: 3rem;
+    transition: all 0.3s ease;
+}
+
 .landing .landing-content h1 {
-    font-weight: 600;
+    font-weight: 900;
     font-size: 4.5rem;
+}
+
+.landing .landing-content h2 {
+    font-weight: lighter;
+    text-transform: capitalize;
 }
 
 .landing .landing-content form .form-items-group {
@@ -97,13 +161,20 @@ img {
     background-color: var(--primary);
 }
 
-.home-categories h2 {
-    font-size: 2rem;
-}
-
 .home-categories .card {
     text-align: center;
     overflow: visible;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.home-categories .card:hover,
+.home-categories .card:hover span {
+    background-color: var(--primary-shade);
+}
+
+.exp-btn {
+    background-color: var(--primary) !important;
 }
 
 .home-categories .card p {
@@ -111,27 +182,20 @@ img {
 }
 
 .home-categories .card span {
-    width: 100px;
+    width: 80px;
     height: 80px;
     color: #fd819c !important;
     position: absolute;
-    font-size: 4rem;
+    font-size: 3.5rem;
     top: -30px;
     left: 50%;
+    border-radius: 50%;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #fff;
-}
-
-h1,
-h2,
-h3,
-h5,
-h6 {
-    overflow-x: visible;
-    color: var(--black-shade);
+    transition: all 0.3s ease;
 }
 
 .double {
@@ -175,6 +239,10 @@ h6 {
     color: var(--gray-shade);
 }
 
+.item p {
+    color: rgb(220, 243, 243) !important;
+}
+
 .numbers .item span {
     display: block;
     font-size: 3rem;
@@ -182,7 +250,7 @@ h6 {
 }
 
 .blog-sample .card {
-    background-color: var(--primary-shade);
+    /* background-color: var(--primary-shade); */
     border: none;
 }
 
@@ -282,102 +350,6 @@ h6 {
     margin-right: 8px;
 }
 
-
-/* Smartphones (portrait and landscape) ----------- */
-
-@media only screen and (min-width: 320px) and (max-width: 480px) {
-    .landing {
-        height: 60vh;
-    }
-    .landing .landing-content h1 {
-        font-weight: 900;
-        font-size: 3rem;
-    }
-    .landing .landing-content form .form-items-group {
-        width: 100%;
-        height: 40px;
-    }
-    .buttons {
-        width: 100%;
-    }
-    .home-categories .card {
-        margin-top: 32px;
-    }
-    .numbers {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-    }
-    .numbers .item {
-        width: auto;
-        height: auto;
-    }
-    .numbers .item p {
-        font-size: 0.9rem;
-    }
-    .numbers .item span {
-        font-size: 1.8rem;
-    }
-}
-
-@media only screen and (min-width: 320px) and (max-width: 480px) and (orientation: landscape) {}
-
-@media only screen and (max-width: 700px) {
-    .double {
-        flex-direction: column;
-    }
-    .double-first,
-    .double-second {
-        width: 100%;
-    }
-    .footer {
-        grid-template-columns: 1fr;
-    }
-}
-
-
-/* iPads (portrait and landscape) ----------- */
-
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
-    /* Styles */
-}
-
-
-/* iPads (landscape) ----------- */
-
-@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-    /* Styles */
-}
-
-
-/* iPads (portrait) ----------- */
-
-@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
-    /* Styles */
-}
-
-
-/* Desktops and laptops ----------- */
-
-@media only screen and (min-width: 1224px) {
-    /* Styles */
-}
-
-
-/* Large screens ----------- */
-
-@media only screen and (min-width: 1824px) {
-    /* Styles */
-}
-
-
-/* iPhone 4 ----------- */
-
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-only screen and (min-device-pixel-ratio: 1.5) {
-    /* Styles */
-}
-
 .blog-detail {
     display: flex;
     height: max-content;
@@ -412,6 +384,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
 .blog-detail aside {
     min-width: 300px;
     max-width: 300px;
+    max-height: 1000px;
     justify-content: space-between;
     background-color: rgb(244, 244, 244);
     top: 32px;
@@ -466,11 +439,10 @@ only screen and (min-device-pixel-ratio: 1.5) {
 }
 
 .aside-articles .aside-article .article-heading {
-    font-weight: 400;
     display: block;
     line-height: 15px;
     overflow: hidden;
-    color: #ff436c;
+    color: var(--black-shade);
 }
 
 .comments-section .comment {
@@ -538,4 +510,32 @@ only screen and (min-device-pixel-ratio: 1.5) {
     position: absolute;
     bottom: 35px;
     left: 0;
+}
+
+.review-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.owl-carousel .card {
+    border: none !important;
+}
+
+.owl-carousel .card {
+    color: var(--primary);
+}
+
+.owl-carousel .card footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cons-bg {
+    background-size: cover;
+    background-image: url(https://i0.wp.com/hr-gazette.com/wp-content/uploads/2019/07/bigstock-183640615.jpg?fit=1600%2C1067&ssl=1);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }

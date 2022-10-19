@@ -1,7 +1,8 @@
 <div class="landing">
-    <div class="landing-overlay overlay bg-dark"></div>
+    <div class="landing-overlay overlay" id="top"></div>
     <div class="landing-content">
         <h1 class="text-center text-light">Find Your Dream Job</h1>
+        <h2 class="text-center text-light">we got your shoulder</h2>
         <form method="post">
             {%csrf_token%}
             <div class="form-items-group mt-5">
@@ -10,4 +11,5 @@
             </div>
         </form>
     </div>
+    <a href="#next"><i class="bi bi-arrow-down text-light"></i></a>
 </div>

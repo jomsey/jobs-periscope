@@ -2,7 +2,7 @@
 <section class="blog-detail mt-5 mb-5 container">
 
     <article>
-        <h1 class="mb-2">{{post.title |title}}</h1>
+        <h2 class="mb-2">{{post.title |title}}</h2>
         <small>{{ post.date_created | date:'d'}} {{ post.date_created | date:'F'}}
             {{post.date_created|date:'Y'}}</small>
         <img src="{{post.cover_image.url}}" alt="" class="cover-image">

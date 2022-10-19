@@ -1,15 +1,15 @@
 {%if latest_posts %}
-<section class="container-fluid  blog-sample pb-4 mt-4 pt-4" style="background-color:rgb(243, 241, 241); background-image: url(https://www.transparenttextures.com/patterns/foggy-birds.png);">
+<section class="container-fluid  blog-sample pb-4 mt-4 pt-4">
     <div class="container">
-        <h4 class="ml-4 mb-4">Recent From Our Blog</h4>
+        <h2 class="pb-4 mb-5 text-center">Recent From Our Blog</h2>
         <div class="row justify-content-center m-4" style="gap: 42px;">
             {% for post in latest_posts %}
             <div class="card col-md" style=" padding:0">
-                <div class="card-image " style="height: 15rem">
+                <div class="card-image " style="height: 12rem">
                     <img src="{{post.cover_image.url}}" alt="">
                 </div>
                 <div class="card-body ">
-                    <h5 class="card-tile">{{ post.title|title }}</h5>
+                    <h5 class="card-tile post-h">{{ post.title|title }}</h5>
                     <p class="card-text text-muted">{{ post.post|safe|truncatewords:10 }}</p>
                 </div>
                 <div class="date p-2">
