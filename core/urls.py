@@ -8,7 +8,7 @@ from . import views
 urlpatterns = [
     path("",views.IndexView.as_view(),name='index'),
     path("jobs",views.JobsListView.as_view(),name="jobs_list"),
-    path("jobs/<str:name>",views.JobDetailView.as_view(),name="job_details"),
+    path("jobs/<str:title>",views.JobDetailView.as_view(),name="job_details"),
     path("post/<int:pk>",views.PostDetailView.as_view(),name="post_detail"),
     path("profile",views.USerProfileView.as_view(),name="profile"),
     path("auth/login",views.LoginView.as_view(),name="login"),

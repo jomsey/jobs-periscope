@@ -6,10 +6,14 @@
     overflow-x: hidden;
 }
 
+*::selection {
+    background-color: transparent !important;
+}
+
 :root {
     --gray: #e8e8e8;
     --gray-shade: rgb(136, 136, 136);
-    --primary: rgb(53, 201, 53);
+    --primary: rgb(66, 172, 66);
     --black-shade: rgb(64, 65, 65);
     --primary-shade: rgb(227, 255, 227);
 }
@@ -38,6 +42,7 @@ h6 {
 
 a {
     text-decoration: none;
+    color: initial;
 }
 
 p {
@@ -84,6 +89,10 @@ img {
     background-repeat: no-repeat;
     background-size: cover;
     background-image: url(https://nevadasmallbusiness.com/wp-content/uploads/2016/04/Keep-Up-Team-Motivation.jpg);
+}
+
+.landing input::placeholder {
+    color: var(--gray) !important;
 }
 
 h2 {
@@ -539,3 +548,96 @@ h2 {
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
+
+.job-card .btn,
+.job-summary .btn {
+    background-color: var(--primary);
+    box-shadow: 0 0 0 1px var(--primary);
+}
+
+.job-card {
+    display: flex !important;
+    border: 1px solid #e8e8e8;
+}
+
+.jobs small {
+    font-size: small;
+}
+
+.bd {
+    border: 1px solid #e8e8e8 !important;
+}
+
+.job-card div:first-child,
+.jobs aside {
+    border-right: 1px solid #e8e8e8 !important;
+}
+
+.jobs aside .btn {
+    color: var(--primary);
+    box-shadow: 0 0 0 1px var(--primary);
+    font-weight: lighter;
+}
+
+.pagination .page-item a {
+    color: var(--primary) !important;
+}
+
+.accordion,
+.accordion-item {
+    border: none;
+}
+
+.pack {
+    display: flex;
+    align-items: center;
+}
+
+.pack i {
+    font-size: 2rem;
+    margin-right: 10px;
+    color: var(--primary);
+}
+
+.detail-topper {
+    background-image: url(https://api.time.com/wp-content/uploads/2021/02/laptop-home-office.jpg);
+}
+
+.nav-avatar {
+    width: 50px;
+    height: 50px;
+    box-shadow: 0 0 0 2px var(--primary);
+}
+
+.nav-login-btn {
+    border: 1px solid var(--primary);
+}
+
+.user {
+    cursor: pointer;
+}
+
+.user i {
+    transition: all 0.2s ease;
+}
+
+.user:hover i {
+    color: var(--primary);
+}
+
+
+/* .top-nav * {
+    border: 1px solid royalblue;
+}
+
+.auth-box,
+.dropdown,
+.top-nav,
+.top-nav .container-fluid {
+    position: initial !important;
+}
+
+.dropdown-menu {
+    position: absolute !important;
+    top: 0;
+} */

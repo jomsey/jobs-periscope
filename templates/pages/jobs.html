@@ -1,33 +1,50 @@
 {%extends '../base.html'%} {% block title %} jobs for you {% endblock title %} {% block content %}
-<div class=" row m-5">
-    <aside class="col-md-2">
-        <span><i class="bi bi-filter mb-4">Filter & Refine</i></span>
-        <div>
-            <span>Job Categories</span>
-            <ul>
+<div class=" row px-5 jobs justify-content-center">
+    <aside class="col-md-2 px-4">
+        <span><i class="bi bi-filter mb-4"> Filter & Refine</i></span>
+        <div class="mt-2">
+            <div class="accordion-header">
+                <strong class="accordion-button" data-bs-toggle="collapse" data-bs-target="#categories" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">Job Categories <i
+                        class="bi bi-chevron-down"></i></strong>
+            </div>
+            <ul class="p-0 accordion" id="categories">
                 {% for c in job_categories %}
-                <li>
-                    <small><a href="{%url 'job_details' c%}">{{c}}</a></small>
+                <li class="accordion-item">
+                    <small><a href="{%url 'job_details' c%}">{{c}} (5)</a></small>
                 </li> {% endfor %}
             </ul>
         </div>
+        <div>
+            <div class="accordion-header">
+                <strong class="accordion-button" data-bs-toggle="collapse" data-bs-target="#types" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">Job Type <i class="bi bi-chevron-down"></i></strong>
+            </div>
+            <ul class="p-0 accordion" id="types">
 
+                <li>
+                    <small>Remote</small>
+                </li>
+                <li><small>Part Time</small> </li>
+                <li><small>FullTime</small></li>
 
+            </ul>
+        </div>
+
+        <span class="btn w-100  mt-5">Hire Someone</span>
     </aside>
-    <main class="col-md-10">
-        {% for job in jobs %}
-        <div class="card p-4 m-4">
-
-            <small class="text-muted ">{{job.category}}</small>
-            <h6>{{job.title}}</h6>
-            {% if job.is_expired %}
-            <span class="badge  bg-warning">Expired</span>{% else %}
-            <small class="text-muted">Application Deadline {{job.expiring_date}}</small> {% endif %}
-
+    <main class=" col-md-10 px-5 py-2">
+        <div class="container row" style="gap: 32px; ">
+            {% for job in jobs %} {% include '../components/job-card.html' %} {% endfor %}
 
         </div>
-        {% endfor %}
-
+        <nav aria-label="Page navigation">
+            <ul class="pagination mx-2 mt-5">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
     </main>
 </div>
 {% endblock content %}

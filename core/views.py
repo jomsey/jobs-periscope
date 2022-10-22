@@ -1,8 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render,redirect
 from django.views.generic import View,DetailView,ListView
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import messages
+from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate,login,logout
 from core.form import PostCommentForm, UserRegisterForm
 from core import models
@@ -26,9 +27,15 @@ class USerProfileView(LoginRequiredMixin,DetailView):
    
 
 class JobDetailView(DetailView):
-    def get(self,request,name):
-        return HttpResponse(name)
-
+    model=models.Job
+    template_name="pages/job-details.html"
+    context_object_name = "job"
+    
+    def get_object(self, queryset=None):
+        queryset = self.get_queryset() if queryset is None else queryset
+        return get_object_or_404(queryset, title=self.kwargs['title'])
+  
+    
 class JobsListView(ListView):
     model=models.Job
     context_object_name="jobs"
@@ -82,7 +89,7 @@ class LoginView(View):
         user = authenticate(password=password,username=username)
         if user:
             login(request,user)
-            return redirect('profile')
+            return HttpResponseRedirect(request.POST.get('next', '/'))
         return render(request,"pages/login.html")
     
 class UserRegisterView(View):

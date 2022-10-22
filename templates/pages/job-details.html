@@ -1,0 +1,61 @@
+{%extends '../base.html'%} {% block title %} {{job.title}} {% endblock title %} {% block content %}
+<div class="detail-topper topper d-flex flex-column align-items-center p-0 container-fluid bg-dark " style="height: 20rem;">
+    <div class="overlay bg-dark"></div>
+
+</div>
+<div class="container  my-5">
+    <nav class="mx-2" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{%url 'index'%}">Home</a></li>
+            <li class="breadcrumb-item "><a href="{%url 'jobs_list'%}">Jobs</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{job.title}}</li>
+        </ol>
+    </nav>
+    <div class="row ">
+        <div class="col-md-8  p-4">
+            <h3 class="text-dark"> {{job.title}}</h3>
+            <hr>
+            <div class="text-muted">
+                {{job.description|safe}}
+            </div>
+        </div>
+        <div class="bd p-4 col-md-4 job-summary">
+            <div class="pack">
+                <i class="bi bi-app-indicator"></i>
+                <div class="left">
+                    <strong>Category: </strong> <br><small class="text-muted">{{job.category}}</small>
+                </div>
+            </div>
+
+            <div class="pack">
+                <i class="bi bi-app-indicator"></i>
+                <div class="left">
+                    <strong>Category: </strong> <br><small class="text-muted">{{job.category}}</small>
+                </div>
+            </div>
+            <div class="pack my-2">
+                <i class="bi bi-app-indicator"></i>
+                <div class="left">
+                    <strong>Category: </strong> <br><small class="text-muted">{{job.category}}</small>
+                </div>
+            </div>
+            <div class="pack my-2">
+                <i class="bi bi-app-indicator"></i>
+                <div class="left">
+                    <strong>Category: </strong> <br><small class="text-muted">{{job.category}}</small>
+                </div>
+            </div>
+            <div class="pack my-2">
+                <i class="bi bi-app-indicator"></i>
+                <div class="left">
+                    <strong>Category: </strong> <br><small class="text-muted">{{job.category}}</small>
+                </div>
+            </div>
+
+
+            <button class="btn w-100  my-4 text-light">Apply Now</button>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
