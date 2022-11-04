@@ -3,9 +3,8 @@
     <div class="container-fluid  nav-bar-pack px-5">
         <a class="navbar-brand" href="{%url 'index'%}"><img src="{%static 'images/brand.svg'%}" style="width: 80px;" alt=""></a>
 
-
-        <div>
-            <ul class="navbar-nav ">
+        <div class="off-canv">
+            <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link " href="{%url 'index'%}">Home</a>
                 </li>
@@ -13,40 +12,49 @@
                     <a class="nav-link" href="{%url 'jobs_list'%}">Jobs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Blog</a>
+                    <a class="nav-link" href="{%url 'posts_list'%}">Blog</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Pricing</a>
                 </li>
 
             </ul>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </div>
-        <div class="auth-box p-2">
+        <div class="auth-box px-5">
             {% if user.is_authenticated %}
             <div class="nav-avatar rounded-circle"><img src="{{user.profile_pic.url}}" alt="">
 
             </div>
 
 
-            <div class="dropdown">
+            <div class="dropdown ">
                 <span class="user" data-bs-toggle="dropdown" aria-expanded="false">
                     <small class="text-light text-center">{{user}} <i class="bi bi-chevron-down"></i></small>
                 </span>
 
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <ul class="dropdown-menu bg-dark">
+                    <li><a class="dropdown-item mx-2  text-light" href="{%url 'profile'%}"><i
+                                class="bi bi-person mx-2"></i> Profile</a>
+                    </li>
+                    <li><a class="dropdown-item mx-2  text-light" href="{%url 'account_logout'%}"><i
+                                class="bi bi-door-closed mx-2"></i> Logout</a>
+                    </li>
                 </ul>
             </div>
 
             {% else %}
-            <a href="{%url 'login'%}" class="text-light">
+            <a href="{%url 'account_login'%}" class="text-light">
                 <span class="nav-login-btn px-4 rounded-pill py-2">Sign in</span>
-                <a href="{%url 'register'%}" class="text-light">
+                <a href="{%url 'account_signup'%}" class="text-light">
                     <span class="nav-signin-btn px-4 rounded-pill py-2">Sign up</span></a>
             </a> {% endif %}
         </div>
+
+
+
     </div>
 
 </nav>

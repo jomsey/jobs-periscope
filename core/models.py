@@ -1,8 +1,10 @@
 from datetime import date
-from random import choices
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from PIL import Image
 from django.conf import settings
+from hitcount.models import  HitCount
+from django.contrib.contenttypes.fields import GenericRelation
 
 class SiteUser(AbstractUser):
     GENDER_CHOICES = (("M","Male"),("F","Female"))
@@ -13,6 +15,15 @@ class SiteUser(AbstractUser):
     profile_pic = models.ImageField(upload_to="profile_pics",default="avatar.jpg")
     biography = models.TextField()
     
+    def save(self, *args, **kwargs):
+        super().save()
+        img = Image.open(self.profile_pic.path)
+        if img:
+            if img.height > 200 or img.width > 200:
+                new_img = (200, 100)
+                img.thumbnail(new_img)
+                img.save(self.profile_pic.path)
+        
     def __str__(self):
         return self.username
     
@@ -35,6 +46,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     date_created = models.DateTimeField(auto_now=True)
     post =models.TextField()
+    views = GenericRelation(HitCount, object_id_field='object_pk',related_query_name='hit_count_generic_relation')
     
     def __str__(self) :
         return f'{self.title[:25]} ...'
@@ -46,9 +58,17 @@ class  PostComments(models.Model):
     post = models.ForeignKey(Post,on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now=True)
     
+    
 class PostLikes(models.Model):
     post = models.ForeignKey(Post,on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+
+
+class FeaturedPost(models.Model):
+      post = models.ForeignKey(Post,on_delete=models.CASCADE)
+      
+      def __str__(self):
+          return self.post.title
     
     
 class Job(models.Model):
@@ -56,12 +76,15 @@ class Job(models.Model):
                  ('Part Time','Part Time'),
                  ('Remote','Remote')]
     title = models.CharField(max_length=200)
+    job_location = models.CharField(max_length=200)
+    years_of_experience = models.PositiveIntegerField()
     posted_by = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL,null=True)
     date_published = models.DateTimeField(auto_now_add=True)
-    job_type = models.CharField(max_length=20,choices=JOB_TYPES,default="Others")
+    job_type = models.CharField(max_length=20,choices=JOB_TYPES)
     expiring_date = models.DateField()
     description = models.TextField()
-    category = models.ForeignKey(JobCategory,on_delete=models.SET_NULL,null=True)
+    category = models.ForeignKey(JobCategory,on_delete=models.SET_NULL,null=True,related_name='jobs')
+    
     
     def __str__(self):
         return self.title
@@ -69,12 +92,17 @@ class Job(models.Model):
     def is_expired(self):
         return date.today()>self.expiring_date
     
-    
 class JobApplication(models.Model):
-    job = models.ForeignKey(Job,on_delete=models.CASCADE)
     applicant = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     date_submitted= models.DateTimeField(auto_now_add=True)
+    jobs = models.ForeignKey(Job,on_delete=models.CASCADE)
     cv = models.FileField(upload_to="cvs")
-    
     def __str__(self):
         return self.job.title
+
+
+class Notification(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    date= models.DateTimeField(auto_now_add=True)
+    information = models.TextField()
+    

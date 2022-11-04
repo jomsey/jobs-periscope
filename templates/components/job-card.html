@@ -1,6 +1,6 @@
 <a href="{%url 'job_details' job.title%}">
-    <div class=" job-card p-4">
-        <div class="w-50">
+    <div class="row border mx-4 p-4">
+        <div class="col-md">
             <h6 class="text-dark">{{job.title}} <small class="text-muted" style="font-weight:lighter ;">-Posted by
                     {{job.posted_by}}</small></h6>
             <small class="text-muted">{{job.category}} </small>
@@ -10,7 +10,7 @@
             <small class="mt-4 text-muted"><i class="bi bi-hourglass"></i> Posted {{ job.date_published|timesince}}
                 ago</small>
         </div>
-        <div class="px-5">{% if job.is_expired %}
+        <div class=" col-md">{% if job.is_expired %}
             <span class="text-info"> Application deadline expired</span> {% else %}
             <small class="text-muted"><i class="bi bi-calendar2-day"></i> Application Deadline
                 :{{job.expiring_date}}</small>

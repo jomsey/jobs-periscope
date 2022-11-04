@@ -1,0 +1,49 @@
+<div class="modal fade" id="edit-profile" tabindex="-1" aria-labelledby="edit-profile" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title text-muted fs-5">Edit Profile</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body ">
+                <form method="post" class="mx-4">
+                    {%csrf_token%}
+                    <div class="mt-2">
+                        <small>Username</small><br> {{form.username}}
+                    </div>
+
+                    <div class="mt-2">
+                        <small>Email</small><br> {{form.email}}
+
+                    </div>
+                    <div class="mt-2">
+                        <small>Phone</small><br> {{form.phone_number}}
+                    </div>
+                    <div class="mt-2">
+                        <small>Date Of Birth</small> <br> {{form.birthday}}
+                    </div>
+                    <div class="mt-2">
+
+                    </div>
+                    <div class="mt-2">
+                        <small>Nationality</small> <br>{{form.nationality}}
+                    </div>
+
+                    <div class="mt-2">
+                        <small>Profile Picture</small> <br> {{form.profile_pic}}
+
+                    </div>
+                    <div class="mt-2">
+                        <small>About Me</small> <br> {{form.biography}}
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="submit" class="btn">Save changes</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

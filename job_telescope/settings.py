@@ -27,6 +27,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+SITE_ID = 2
+#allauth configs
+LOGIN_REDIRECT_URL='profile'
+ACCOUNT_USERNAME_BLACKLIST =["admin"]
+ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Application definition
 
@@ -37,8 +45,32 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',
+    'core','django.contrib.sites',
+    'hitcount',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+   'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.twitter',
+    
 ]
+
+
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+         'google': {
+      'SCOPE': [
+         'profile',
+         'email',
+      ],
+      'AUTH_PARAMS': {
+         'access_type': 'online',
+      }
+   }
+    }
+}     
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -50,6 +82,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+AUTHENTICATION_BACKENDS = [
+    
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+]
 ROOT_URLCONF = 'job_telescope.urls'
 
 TEMPLATES = [
@@ -60,9 +98,11 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.request'
+                
+                
             ],
         },
     },
@@ -88,9 +128,6 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     
 ]

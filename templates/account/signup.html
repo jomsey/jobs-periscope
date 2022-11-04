@@ -1,0 +1,19 @@
+{% extends '../base.html'%} {% load i18n %} {% load account socialaccount %} {% block title %} Jobs Telescope | Create Account {% endblock title %} {% block content %}
+<div class="container auth-container p-5">
+
+    <form method="post" class="card py-4 px-5 bg-dark" novalidate>
+        <h1 class="text-center my-2 fs-2">Signup</h1>
+        {%csrf_token%} {{ form.email}}
+        <small class="error text-warning"> {{form.email.errors}}</small> {{ form.username}}
+        <small class="error text-warning"> {{form.username.errors}}</small> {{ form.password1}}
+        <small class="error text-warning"> {{form.password1.errors}}</small> {{ form.password2}}
+        <small class="error text-warning"> {{form.password2.errors}}</small> {% if redirect_field_value %}
+        <input type="hidden text-warning" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" /> {% endif %}
+
+        <button type="submit" class="btn btn-secondary mt-5 mb-4 btn-block">Create Account</button>
+
+        <span class="text-center text-muted mt-4">Have an account?<a href="{{ signup_url }}">Login Here</a></span>
+    </form>
+
+</div>
+{% endblock content %}

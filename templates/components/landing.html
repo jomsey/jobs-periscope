@@ -3,10 +3,9 @@
     <div class="landing-content">
         <h1 class="text-center text-light">Find Your Dream Job</h1>
         <h2 class="text-center text-light">we got your shoulder</h2>
-        <form method="post">
-            {%csrf_token%}
+        <form method="get">
             <div class="form-items-group mt-5">
-                <input type="text" class="text-light" placeholder="search job title" name="job">
+                <input type="text" class="text-light" placeholder="search job title" name="query">
                 <button type="submit" class="text-light">SEARCH</button>
             </div>
         </form>

@@ -3,7 +3,6 @@
     padding: 0;
     box-sizing: border-box;
     position: relative;
-    overflow-x: hidden;
 }
 
 *::selection {
@@ -23,6 +22,7 @@ body {
     background-color: #fff;
     max-width: 1500px;
     margin: 0 auto;
+    overflow-x: hidden;
 }
 
 h1,
@@ -35,6 +35,10 @@ h6 {
     color: rgb(172, 9, 158);
 }
 
+li {
+    list-style-type: none;
+}
+
 .post-h {
     color: rgb(238, 1, 218);
     font-size: medium;
@@ -43,10 +47,6 @@ h6 {
 a {
     text-decoration: none;
     color: initial;
-}
-
-p {
-    font-size: 1.1rem;
 }
 
 .w-70 {
@@ -193,7 +193,7 @@ h2 {
 .home-categories .card span {
     width: 80px;
     height: 80px;
-    color: #fd819c !important;
+    color: #fd81f3 !important;
     position: absolute;
     font-size: 3.5rem;
     top: -30px;
@@ -259,7 +259,6 @@ h2 {
 }
 
 .blog-sample .card {
-    /* background-color: var(--primary-shade); */
     border: none;
 }
 
@@ -526,6 +525,7 @@ h2 {
     height: 50px;
     border-radius: 50%;
     margin: 0 auto;
+    overflow: hidden;
 }
 
 .owl-carousel .card {
@@ -607,6 +607,7 @@ h2 {
     width: 50px;
     height: 50px;
     box-shadow: 0 0 0 2px var(--primary);
+    overflow: hidden;
 }
 
 .nav-login-btn {
@@ -617,7 +618,8 @@ h2 {
     cursor: pointer;
 }
 
-.user i {
+.user i,
+.dropdown-item {
     transition: all 0.2s ease;
 }
 
@@ -625,19 +627,53 @@ h2 {
     color: var(--primary);
 }
 
-
-/* .top-nav * {
-    border: 1px solid royalblue;
+.dropdown-item:hover {
+    color: var(--primary) !important;
+    background-color: transparent;
 }
 
-.auth-box,
-.dropdown,
-.top-nav,
-.top-nav .container-fluid {
-    position: initial !important;
+.profile .avatar {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
 }
 
-.dropdown-menu {
-    position: absolute !important;
-    top: 0;
-} */
+.me-simple .edit {
+    box-shadow: 0 0 0 2px var(--primary);
+}
+
+.custom-tooltip {
+    --bs-tooltip-bg: var(--primary);
+}
+
+.errorlist {
+    padding: 0 !important;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 2px 1px var(--primary);
+}
+
+.blogs-topper {
+    background-image: linear-gradient(to bottom, rgb(103, 233, 120), transparent);
+}
+
+.blogs-topper nav {
+    width: 150px;
+    margin: auto;
+}
+
+.featured-stories .card {
+    height: 300px;
+    overflow: hidden;
+}
+
+.fs-title {
+    height: 60px;
+}
+
+.other-posts {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+}

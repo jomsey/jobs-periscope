@@ -1,0 +1,86 @@
+{% extends '../base.html'%} {% block title %} Jobs Telescope | Our Blog{% endblock title %} {% block content %}
+
+<div class="container-fluid  p-0 ">
+    <!-- Top Gradient Bg with breadcrumb -->
+    <div class="blogs-topper m-0" style="height: 200px;">
+        <h1 class="text-center text-light pt-5  ">Our Blog</h1>
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb mt-4">
+                <li class="breadcrumb-item text-center"><a href="{%url 'index'%}"><b>Home</b></a></li>
+                <li class="breadcrumb-item active" aria-current="page"><b>Blog</b></li>
+            </ol>
+        </nav>
+
+    </div>
+    <div class="container px-5 ">
+
+        <!-- Featured Posts -->
+
+        {% if featured_posts %}
+        <h2 class="fs-4">Featured Stories</h2>
+        <div class="row featured-stories" style="gap:24px">
+            {% for post in featured_posts %}
+            <div class="card col-md  p-0  ">
+                <img src="{{post.post.cover_image.url}}" alt="" loading="lazy">
+                <div class="fs-title  position-absolute w-100  bottom-0">
+                    <div class="overlay bg-dark"></div>
+                    <span class="text-light fs-6  top-50">{{ post.post.title | title}}
+                    </span>
+                </div>
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+        {% endif %}
+
+        <div class="row my-5 p-0" style="column-gap: 24px;">
+
+            <!-- Recent posts -->
+
+            <div class=" row mb-4 col-md-8">
+                <h2 class="fs-4 mx-0">Recent Stories</h2>
+                <div class="other-posts p-0">
+                    {% for post in posts %}
+                    <a href="{%url 'post_detail' post.id%}">
+                        <div class="card p-0">
+                            <img src="{{post.cover_image.url}}" class="card-img-top " alt="..." style="max-height: 9rem;">
+                            <div class="card-body">
+                                <h5 class="fs-6 text-dark">{{ post.title | title}}</h5>
+                                <small class="card-text text-muted ">{{ post.post | capfirst | safe |truncatewords:10}}</small>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+
+                </div>
+
+                <!-- Pagination -->
+
+                {% include '../components/paginator.html' %}
+
+
+            </div>
+
+            <!-- Popular Posts -->
+
+            <div class="col-md-4 popular-posts px-4">
+                <h3 class="fs-4 mx-0">Popular Posts</h3>
+
+                {% for post in popular_posts %}
+                <div class=" my-2 d-flex flex-row align-items-center" style="column-gap: 16px;">
+                    <strong class="count text-muted fs-1">{{forloop.counter}}</strong>
+                    <div>
+                        <strong>{{ post.title | title}}</strong>
+                        <br>
+                        <small class="text-muted">30 May 2010</small>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}.

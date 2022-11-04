@@ -39,3 +39,15 @@ new numberRush("companies", {
   speed: 3,
   maxNumber: 40,
 });
+
+
+
+
+
+
+
+
+
+//initialize all tooltips on a page would be to select them by their data-bs-toggle attribute
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))

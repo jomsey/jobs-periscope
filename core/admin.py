@@ -4,7 +4,10 @@ from . models import(Job,
                      SiteUser,
                      JobCategory,
                      PostComments,
-                     PostLikes,Post)
+                     PostLikes,Post,FeaturedPost,Notification)
+@admin.register(FeaturedPost)
+class FeaturedPostAdmin(admin.ModelAdmin):
+    pass
 
 @admin.register(Job)
 class JobAdmin(admin.ModelAdmin):
@@ -31,6 +34,10 @@ class PostLikesAdmin(admin.ModelAdmin):
 
 @admin.register(JobCategory)
 class JobCategoryAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Notification)
+class NotificationsAdmin(admin.ModelAdmin):
     pass
 
 

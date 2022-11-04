@@ -1,6 +1,6 @@
 {%extends '../base.html'%} {% block title %} jobs for you {% endblock title %} {% block content %}
-<div class=" row px-5 jobs justify-content-center">
-    <aside class="col-md-2 px-4">
+<div class=" row  px-4 jobs">
+    <aside class="col-md-2  p-4">
         <span><i class="bi bi-filter mb-4"> Filter & Refine</i></span>
         <div class="mt-2">
             <div class="accordion-header">
@@ -8,9 +8,12 @@
                         class="bi bi-chevron-down"></i></strong>
             </div>
             <ul class="p-0 accordion" id="categories">
+                <li class="accordion-item"><small><a href="{%url 'jobs_list'%}">All Jobs</a></small></li>
                 {% for c in job_categories %}
                 <li class="accordion-item">
-                    <small><a href="{%url 'job_details' c%}">{{c}} (5)</a></small>
+                    <small><a href="?query={{c}}">{{c}} {% if c.jobs.count %}
+                            ({{c.jobs.count}})
+                            {% endif %} </a></small>
                 </li> {% endfor %}
             </ul>
         </div>
@@ -21,30 +24,32 @@
             <ul class="p-0 accordion" id="types">
 
                 <li>
-                    <small>Remote</small>
+                    <a href="?query=remote"> <small>Remote</small></a>
                 </li>
-                <li><small>Part Time</small> </li>
-                <li><small>FullTime</small></li>
+                <li>
+                    <a href="?query=part time">
+                        <small>Part Time</small>
+                    </a>
+                </li>
+                <li>
+                    <a href="?query=full time">
+                        <small>FullTime</small>
+                    </a>
+                </li>
 
             </ul>
         </div>
 
-        <span class="btn w-100  mt-5">Hire Someone</span>
+        <span class="btn w-100  mt-5">Add Job</span>
     </aside>
-    <main class=" col-md-10 px-5 py-2">
-        <div class="container row" style="gap: 32px; ">
-            {% for job in jobs %} {% include '../components/job-card.html' %} {% endfor %}
-
+    <main class=" col-md-10  py-5">
+        {% if jobs %}
+        <div class=" row justify-content-center p-0 m-0" style="gap: 32px; ">
+            {% for job in jobs %} {% include '../components/job-card.html' %} {% endfor %} {% else %}
+            <div class="p-5 border">
+                <h1 class="text-center text-muted m-5">No Items To Display</h1>
+            </div>{% endif %} {% include '../components/paginator.html' %}
         </div>
-        <nav aria-label="Page navigation">
-            <ul class="pagination mx-2 mt-5">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-        </nav>
     </main>
 </div>
 {% endblock content %}
