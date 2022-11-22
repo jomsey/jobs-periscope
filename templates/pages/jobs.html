@@ -1,6 +1,6 @@
 {%extends '../base.html'%} {% block title %} jobs for you {% endblock title %} {% block content %}
-<div class=" row  px-4 jobs">
-    <aside class="col-md-2  p-4">
+<div class=" row   jobs">
+    <aside class="col-md-2 filters p-5">
         <span><i class="bi bi-filter mb-4"> Filter & Refine</i></span>
         <div class="mt-2">
             <div class="accordion-header">
@@ -40,11 +40,11 @@
             </ul>
         </div>
 
-        <span class="btn w-100  mt-5">Add Job</span>
+        <span class="btn w-100  mt-5" data-bs-toggle="modal" data-bs-target="#add_job">Add Job</span> {% include '../components/add_job_form.html' %}
     </aside>
     <main class=" col-md-10  py-5">
         {% if jobs %}
-        <div class=" row justify-content-center p-0 m-0" style="gap: 32px; ">
+        <div class=" row justify-content-center p-0 mx-5" style="gap: 32px; ">
             {% for job in jobs %} {% include '../components/job-card.html' %} {% endfor %} {% else %}
             <div class="p-5 border">
                 <h1 class="text-center text-muted m-5">No Items To Display</h1>

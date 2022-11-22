@@ -5,12 +5,14 @@ from PIL import Image
 from django.conf import settings
 from hitcount.models import  HitCount
 from django.contrib.contenttypes.fields import GenericRelation
+from core.validators import cv_validator
+from django_countries.fields import CountryField
 
 class SiteUser(AbstractUser):
     GENDER_CHOICES = (("M","Male"),("F","Female"))
     phone_number = models.CharField(max_length=15,null=True)
     birthday = models.DateField(null=True)
-    nationality = models.CharField(max_length=15,null=True)
+    nationality = CountryField(blank_label='(select country)')
     gender = models.CharField(max_length=1,choices=GENDER_CHOICES,null=True)
     profile_pic = models.ImageField(upload_to="profile_pics",default="avatar.jpg")
     biography = models.TextField()
@@ -92,13 +94,16 @@ class Job(models.Model):
     def is_expired(self):
         return date.today()>self.expiring_date
     
+    class Meta:
+        ordering = ['id']
+    
 class JobApplication(models.Model):
     applicant = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     date_submitted= models.DateTimeField(auto_now_add=True)
     jobs = models.ForeignKey(Job,on_delete=models.CASCADE)
-    cv = models.FileField(upload_to="cvs")
+    cv = models.FileField(upload_to="cvs",validators=[cv_validator])
     def __str__(self):
-        return self.job.title
+        return self.jobs.title
 
 
 class Notification(models.Model):

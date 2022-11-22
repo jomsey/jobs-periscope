@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+from django.contrib.messages import constants as messages
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 SITE_ID = 2
+
 #allauth configs
 LOGIN_REDIRECT_URL='profile'
 ACCOUNT_USERNAME_BLACKLIST =["admin"]
@@ -51,8 +52,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
    'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.google',
+     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.twitter',
+    'storages',
     
 ]
 
@@ -158,3 +160,27 @@ MEDIA_ROOT = BASE_DIR/'media'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# AWS_ACCESS_KEY_ID = 'AKIA5Z25NP2OMEI5QI5I'
+# AWS_SECRET_ACCESS_KEY = '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'
+# AWS_STORAGE_BUCKET_NAME = 'job-telescope'
+# AWS_S3_FILE_OVERWRITE = False
+# AWS_DEFAULT_ACL = None
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# AWS_LOCATION = 'static'
+# AWS_S3_REGION_NAME = "us-east-1"  
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+# STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}

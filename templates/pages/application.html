@@ -1,0 +1,15 @@
+{%extends '../base.html'%} {% block title %} Apply {% endblock title %} {% block content %}
+<div class="container application-container p-5">
+    {% include "../components/message.html" %}
+
+    <p>You are applying for : <strong>{{job.title}}</strong></p>
+    <p class=" my-4 ">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores repellat accusamus, pariatur quas sed nam minus libero, culpa nesciunt vero, ab harum accusantium dolor voluptas nisi sunt voluptatem sit eius.
+    </p>
+    <form method="post" enctype="multipart/form-data">
+        {%csrf_token%} <small class="text-muted ">Upload your cv file</small>{{form.cv}} {% if form.errors %}
+        <small class="text-danger pt-4">{{form.cv.errors}}</small>{% endif %}
+
+        <button type="submit " class="btn btn-success my-5 "> Submit Job Application</button>
+    </form>
+</div>
+{% endblock content %}

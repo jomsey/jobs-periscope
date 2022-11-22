@@ -1,0 +1,22 @@
+<!-- Edit Job New Modal -->
+<div class="modal fade" id="add_job" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title fs-5 text-muted" id="staticBackdropLabel">Edit Job</span>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form method="post" action="add_job">
+                    {%csrf_token%} {{ add_job_form.as_p}}
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-secondary text-light px-5">SAVE</button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,21 +1,23 @@
-<a href="{%url 'job_details' job.title%}">
-    <div class="row border mx-4 p-4">
-        <div class="col-md">
-            <h6 class="text-dark">{{job.title}} <small class="text-muted" style="font-weight:lighter ;">-Posted by
-                    {{job.posted_by}}</small></h6>
-            <small class="text-muted">{{job.category}} </small>
-            <br>
-            <small class="text-muted"><i class="bi bi-geo-alt"></i> Kampala</small>
-            <br>
-            <small class="mt-4 text-muted"><i class="bi bi-hourglass"></i> Posted {{ job.date_published|timesince}}
-                ago</small>
-        </div>
-        <div class=" col-md">{% if job.is_expired %}
-            <span class="text-info"> Application deadline expired</span> {% else %}
-            <small class="text-muted"><i class="bi bi-calendar2-day"></i> Application Deadline
-                :{{job.expiring_date}}</small>
-            <span class="btn text-light  mt-4 w-100">Apply</span> {% endif %}
-
-        </div>
+<div class="row border  p-4 " data-aos="fade-up">
+    <div class="col-md">
+        <h6 class="text-dark">{{job.title}} <small class="text-muted" style="font-weight:lighter ;">-Posted by
+                {{job.posted_by}}</small></h6>
+        <small class="text-muted">{{job.category}} </small>
+        <br>
+        <small class="text-muted"><i class="bi bi-geo-alt"></i> Kampala</small>
+        <br>
+        <small class="mt-4 text-muted"><i class="bi bi-hourglass"></i> Posted {{ job.date_published|timesince}}
+            ago</small>
     </div>
-</a>
+    <div class=" col-md ">{% if job.is_expired %}
+        <span class="text-info"> Application deadline expired</span> {% else %}
+        <small class="text-muted"><i class="bi bi-calendar2-day"></i> Application Deadline
+            :{{job.expiring_date}}</small>
+        <br>
+        <a href="{%url 'apply' job.id%}"> <button class="btn text-light bg-success  mt-4 w-100">Apply
+            </button> </a>
+        {% endif %}
+        <a href="{%url 'job_details' job.title%}"> <button class="btn text-success border-success  mt-4 w-100">View Job Details
+            </button></a>
+    </div>
+</div>

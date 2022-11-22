@@ -1,8 +1,8 @@
 {%extends '../base.html'%} {% block title %} {{job.title}} {% endblock title %} {% block content %}
-<div class="detail-topper topper d-flex flex-column align-items-center p-0 container-fluid bg-dark " style="height: 20rem;">
+<!-- <div class="detail-topper topper d-flex flex-column align-items-center p-0 container-fluid bg-dark " style="height: 20rem;">
     <div class="overlay bg-dark"></div>
 
-</div>
+</div> -->
 <div class="container  my-5">
     <nav class="mx-2" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -20,15 +20,9 @@
             </div>
         </div>
         <div class="bd p-4 col-md-4 job-summary">
-            <div class="pack">
-                <i class="bi bi-app-indicator"></i>
-                <div class="left">
-                    <strong>Category: </strong> <br><small class="text-muted">{{job.category}}</small>
-                </div>
-            </div>
 
             <div class="pack">
-                <i class="bi bi-app-indicator"></i>
+                <i class="bi bi-collection"></i>
                 <div class="left">
                     <strong>Category: </strong> <br><small class="text-muted">{{job.category}}</small>
                 </div>
@@ -36,24 +30,31 @@
             <div class="pack my-2">
                 <i class="bi bi-app-indicator"></i>
                 <div class="left">
-                    <strong>Category: </strong> <br><small class="text-muted">{{job.category}}</small>
+                    <strong>Job Type: </strong> <br><small class="text-muted">{{job.job_type}}</small>
                 </div>
             </div>
             <div class="pack my-2">
-                <i class="bi bi-app-indicator"></i>
+                <i class="bi bi-star"></i>
                 <div class="left">
-                    <strong>Category: </strong> <br><small class="text-muted">{{job.category}}</small>
-                </div>
-            </div>
-            <div class="pack my-2">
-                <i class="bi bi-app-indicator"></i>
-                <div class="left">
-                    <strong>Category: </strong> <br><small class="text-muted">{{job.category}}</small>
+                    <strong>Experience: </strong> <br><small class="text-muted">{{job.years_of_experience}} years</small>
                 </div>
             </div>
 
+            <div class="pack my-2">
+                <i class="bi bi-calendar"></i>
+                <div class="left">
+                    <strong>Published: </strong> <br><small class="text-muted">{{job.date_published}}</small>
+                </div>
+            </div>
 
-            <button class="btn w-100  my-4 text-light">Apply Now</button>
+            <div class="pack my-2">
+                <i class="bi bi-map"></i>
+                <div class="left">
+                    <strong>Location: </strong> <br><small class="text-muted">{{job.job_location}}</small>
+                </div>
+            </div>
+
+            <a href="{%url 'apply' job.id%}"><button class="btn w-100  my-4 text-light">Apply Now</button></a>
         </div>
     </div>
 </div>

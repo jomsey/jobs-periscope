@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from hitcount.views import HitCountDetailView
-from core.forms import PostCommentForm, UserProfileForm
+from core.forms import PostCommentForm, UserProfileForm,AddNewJobForm,JobApplicationForm
 from core import models
 
 
@@ -25,22 +25,29 @@ class USerProfileView(LoginRequiredMixin,View):
     template="pages/profile.html"
     login_url='/auth/login'
     
-    
-
     def get(self,request):
+        jobs_posted_by_user = models.Job.objects.filter(posted_by=request.user).order_by('-date_published').select_related('posted_by')
         user_notifications = models.Notification.objects.filter(user=self.request.user).order_by('-date').select_related('user')
-        form =UserProfileForm(instance=self.request.user)
+        form =UserProfileForm(instance=request.user)
         
         context  = {'form':form,
-                    'notifications':user_notifications}
+                    'notifications':user_notifications,
+                    'jobs_posted':jobs_posted_by_user,
+                     'add_job_form': AddNewJobForm()
+                   }
         
         return render(request,self.template,context)
-  
+    
     def post(self,request):
-        form =UserProfileForm(instance=request.user,data=request.POST)
+        form =UserProfileForm(request.POST,request.FILES,instance=request.user)
         if form.is_valid():
             form.save()
-        return render(request,self.template,{"form":form})
+            messages.success(request,"Your profile has been edited successfully")
+        else:
+            messages.error(request,"OOps! Check your from data and try again")
+            
+        context = {"form":form}
+        return HttpResponseRedirect("profile")
 
 class JobDetailView(DetailView):
     model=models.Job
@@ -64,11 +71,22 @@ class JobsListView(ListView):
             return models.Job.objects.filter(Q(category__name__startswith=query ) |Q(category__name__icontains=query ) | Q(title__icontains=query ) | Q(job_type__icontains=query ) | Q(title__startswith=query ) | Q(job_type__startswith=query ))
         return models.Job.objects.all().order_by("-date_published")
     
-    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['job_categories']=models.JobCategory.objects.all()
+        context['add_job_form'] = AddNewJobForm()
         return context
+    
+    def post(self,request):
+        form = AddNewJobForm(request.POST);
+        if form.is_valid():
+            job = form.save(commit=False)
+            job.posted_by = request.user
+            job.save()
+            messages.success(request,"Your job has been added successfully")
+        else:
+            messages.error(request,"OOps! Check your from data and try again")
+        return HttpResponseRedirect('jobs')
     
  
 class PostsListView(ListView):
@@ -94,6 +112,7 @@ class PostDetailView(HitCountDetailView):
         context = super().get_context_data(**kwargs)
         context["comments"] = models.PostComments.objects.filter(post=kwargs.get("object")).order_by("-date_created")
         context["form"] = PostCommentForm()
+        context["popular_posts"] = models.Post.objects.select_related('user').order_by("views")[:5]
         return context
     
     def post(self,request,*args, **kwargs):
@@ -105,15 +124,53 @@ class PostDetailView(HitCountDetailView):
             
             if  self.request.user.is_authenticated:
                  new_comment = models.PostComments(user=user,comment=comment,post=post)
-                 new_comment.save()
-                 messages.success(request,"success")
-            return redirect("login")
+                 new_comment.save()  
+            messages.info(request,"Cannot submit comment if not logged in !")
         return redirect("post_detail",kwargs.get("pk") )
     
-class JobApplicationView(View):
-    pass
 
-
-class CreateNewJobView(View):
-    pass
-
+class DeleteJobView(LoginRequiredMixin,View):
+    login_url = "/auth/login"
+    def get(self,request,id):
+        job = get_object_or_404(models.Job,id=id)
+        job.delete()
+        messages.success(request,"Job has been deleted")
+        return redirect("profile")
+    
+class AddJobView(LoginRequiredMixin,View):
+    login_url = "/auth/login"
+    
+    def post(self,request):
+        form = AddNewJobForm(request.POST)
+        if form.is_valid():
+            job = form.save(commit=False)
+            job.posted_by = request.user
+            job.save()
+            messages.success(request,"Your job has been added successfully")
+        else:
+            messages.error(request,"OOps! Check your from data and try again")
+        return redirect("profile")
+    
+    
+class JobApplicationView(LoginRequiredMixin,View):
+    login_url = "/auth/login"
+    def get(self,request,job_id):
+        form = JobApplicationForm(request.POST)
+        applied_job = get_object_or_404(models.Job,id=job_id)
+        return render(request,"pages/application.html",{"form":form,"job":applied_job})
+    
+    def post(self,request,job_id):
+        form = JobApplicationForm(request.POST,request.FILES)
+        applied_job = get_object_or_404(models.Job,id=job_id)
+       
+        print(form.is_valid())
+        if form.is_valid():
+            application = form.save(commit=False)
+            application.applicant = request.user
+            application.jobs=applied_job
+            application.save()
+            messages.success(request,"Your application has been submitted")
+        else:
+            messages.error (request,"Please check your form data and try again")
+        return render(request,"pages/application.html",{"form":form,"job":applied_job})
+    

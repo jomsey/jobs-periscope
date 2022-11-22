@@ -1,13 +1,14 @@
-<span>My Profile</span> <i class="fa fa-mail">N</i>
-<div class="mt-2">
+<div class="pt-2">
     <div class="avatar">
         <img src="{{user.profile_pic.url}}" alt="profile pic" loading="lazy">
     </div>
+    <span class="text-success mt-2" data-bs-toggle="modal" data-bs-target="#edit-profile">Edit
+        Profile</span>
     <div class="biography py-4">
         <strong class="mb-2">About Me</strong>
         <br>
         <small>
-            {{user.biography}}
+            {{user.biography|truncatewords:30}}
         </small>
     </div>
 </div>
@@ -35,9 +36,6 @@
         <small class="text-muted">{{user.birthday}}</small>
     </div>
 
-    <div class="detail">
-        <strong data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Notifications</strong>
-    </div>
 
 
 </div>

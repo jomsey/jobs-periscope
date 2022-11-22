@@ -1,31 +1,61 @@
 {%extends '../base.html'%} {% block title %} jobs for you {% endblock title %} {% block content %}
-<div class=" row px-5 pt-2 jobs justify-content-center">
-    <aside class="col-md-2 p-4">
+<div class="bg-success py-2 px-4 profile-top">
+    <strong style="cursor: pointer;" class="text-light" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">  <i class="bi bi-chat-square fs-4"></i> {{notifications.count}}</strong>
+    <button class="btn border-light  text-light px-5 " data-bs-toggle="modal" data-bs-target="#add_job">Post A Job</button>
+
+</div>
+<div class=" row  jobs justify-content-center">
+    <aside class="col-md-2 p-5">
         {% include '../components/about-user.html '%}
-        <span class="btn w-100  mt-5" data-bs-toggle="modal" data-bs-target="#edit-profile">Edit Profile</span>
-        <span class="btn w-100  mt-2">Browse Jobs</span>
     </aside>
     <main class=" col-md-8">
         <div class="container-fluid py-4 ">
+            {% include "../components/message.html" %}
             <h1 class="fs-4">Lorem ipsum dolor sit</h1>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat pariatur nam vel animi eos et ipsam, architecto blanditiis non at laborum! Necessitatibus deserunt sint aliquam, molestias eaque error officia. Atque.</p>
+            <p class="my-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat pariatur nam vel animi eos et ipsam, architecto blanditiis non at laborum! Necessitatibus deserunt sint aliquam, molestias eaque error officia. Atque.</p>
 
 
             <div class="posted-jobs my-4">
                 <h2 class="fs-4">Jobs Posted By You</h2>
-                <div class="border p-2 mt-4">
-                    <strong class="m-5 text-muted">Jobs you have posted are listed here</strong>
+                <div class=" mt-4 p-4">
+
+                    {% if jobs_posted %}{% for job in jobs_posted%}
+                    <div class="job_post_card my-4 p-4 border row">
+                        <div class="col-md">
+                            <h6 class="text-dark">{{job.title}}</h6>
+                            <small class="text-muted">{{job.category}} </small>
+                            <br>
+                            <small class="text-muted"><i class="bi bi-geo-alt"></i> Kampala</small>
+                            <br>
+                            <small class="mt-4 text-muted"><i class="bi bi-hourglass"></i> Posted
+                                {{job.date_published|timesince}}
+                                ago</small>
+                            <br>
+
+                        </div>
+                        <div class=" col-md">{% if job.is_expired %}
+                            <span class="text-info"> Application deadline expired</span> {% else %}
+                            <small class="text-muted"><i class="bi bi-calendar2-day"></i> Application Deadline
+                                :{{job.expiring_date}}</small> {% endif %}
+                            <a href="{%url 'delete_job' job.id%}"><span
+                                    class=" btn border-success text-success mt-4 w-100 ">Remove Job</span></a>
+
+                        </div>
+                        <span>5 applications</span>
+
+
+                    </div>{% endfor %} {% else %} <strong class="text-muted">Jobs you have posted are listed
+                        here</strong>{% endif %}
                 </div>
-                <button class="btn border-success mt-4 text-success px-5">Post A Job</button>
+
             </div>
         </div>
 
     </main>
-    <div class="col-md-2 border py-4">
-        <h2 class="fs-4">Job Applications</h2>
-        <div class="card mx-2 my-4 p-2">
-            <strong class="text-muted">You haven't applied for any Jobs</strong>
+    <div class="col-md-2 border py-4 ">
+        <h2 class="fs-4 ">Job Applications</h2>
+        <div class="card mx-2 my-4 p-2 ">
+            <strong class="text-muted ">You haven't applied for any Jobs</strong>
         </div>
     </div>
-</div>
-{% include '../components/edit_profile_form.html '%} {% include '../components/user-notifications.html '%} {% endblock content %}
+</div>{% include '../components/edit_job_form.html '%} {% include '../components/edit_profile_form.html '%} {% include '../components/user-notifications.html '%} {% endblock content %}
