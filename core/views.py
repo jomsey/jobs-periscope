@@ -27,7 +27,8 @@ class USerProfileView(LoginRequiredMixin,View):
     
     def get(self,request):
         jobs_posted_by_user = models.Job.objects.filter(posted_by=request.user).order_by('-date_published').select_related('posted_by')
-        user_notifications = models.Notification.objects.filter(user=self.request.user).order_by('-date').select_related('user')
+        user = get_object_or_404(models.SiteUser,id=request.user.id)
+        user_notifications = user.notification_set.all()
         form =UserProfileForm(instance=request.user)
         
         context  = {'form':form,
@@ -124,8 +125,9 @@ class PostDetailView(HitCountDetailView):
             
             if  self.request.user.is_authenticated:
                  new_comment = models.PostComments(user=user,comment=comment,post=post)
-                 new_comment.save()  
-            messages.info(request,"Cannot submit comment if not logged in !")
+                 new_comment.save() 
+            else:
+                messages.info(request,"Cannot submit comment if not logged in !")
         return redirect("post_detail",kwargs.get("pk") )
     
 
@@ -169,8 +171,28 @@ class JobApplicationView(LoginRequiredMixin,View):
             application.applicant = request.user
             application.jobs=applied_job
             application.save()
+            
             messages.success(request,"Your application has been submitted")
+            
+            #notify the person who posted the job for any applications made
+            notification = models.Notification.objects.create()
+            job_owner = get_object_or_404(models.SiteUser,id=applied_job.posted_by_id)
+            notification.users.set([job_owner])
+            notification.information=f"Someone has submitted an application for {applied_job.title}"
+            notification.save()
+            
         else:
             messages.error (request,"Please check your form data and try again")
         return render(request,"pages/application.html",{"form":form,"job":applied_job})
     
+    
+class RemoveNotificationView(LoginRequiredMixin,View):
+    login_url = "/auth/login"
+    
+    def get(self,request,notification_id):
+        notification = get_object_or_404(models.Notification,id=notification_id)
+        #just remove user from the list of people who were notified
+        #cannot delete the notification 'coz could be shared by multiple users
+        notification.users.remove(request.user)
+        return redirect("profile")
+        

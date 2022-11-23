@@ -25,6 +25,10 @@ body {
     overflow-x: hidden;
 }
 
+.nav-item a:hover {
+    color: #fff !important;
+}
+
 h1,
 h2,
 h3,
@@ -376,10 +380,6 @@ h2 {
     color: var(--black-shade);
 }
 
-.blog-detail article {
-    min-width: 500px;
-}
-
 article .cover-image {
     height: 400px;
     width: 100%;
@@ -678,4 +678,18 @@ aside,
 .errorlist {
     padding: 0;
     margin: 5px 0;
+}
+
+#id_login,
+#id_password,
+#id_password2,
+#id_password1,
+#id_username,
+#id_email {
+    padding: 8px;
+    border: none;
+    background: transparent;
+    margin: 8px 0;
+    border: 1px solid var(--primary);
+    outline: none;
 }

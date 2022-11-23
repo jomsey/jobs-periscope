@@ -107,7 +107,11 @@ class JobApplication(models.Model):
 
 
 class Notification(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    users = models.ManyToManyField(settings.AUTH_USER_MODEL)
     date= models.DateTimeField(auto_now_add=True)
     information = models.TextField()
+    
+    def __str__(self):
+        return f"{self.information[:60]} ..." if len(self.information) > 30 else self.information
+     
     

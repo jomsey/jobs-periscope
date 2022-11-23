@@ -8,9 +8,9 @@
                         class="bi bi-chevron-down"></i></strong>
             </div>
             <ul class="p-0 accordion" id="categories">
-                <li class="accordion-item"><small><a href="{%url 'jobs_list'%}">All Jobs</a></small></li>
+                <li class="accordion-item" style="background-color: #e8e8e8 !important"><small><a href="{%url 'jobs_list'%}">All Jobs</a></small></li>
                 {% for c in job_categories %}
-                <li class="accordion-item">
+                <li class="accordion-item" style="background-color: #e8e8e8 !important">
                     <small><a href="?query={{c}}">{{c}} {% if c.jobs.count %}
                             ({{c.jobs.count}})
                             {% endif %} </a></small>

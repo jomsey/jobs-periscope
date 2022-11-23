@@ -2,14 +2,14 @@
 <div class="container">
     <section class="row mt-5 mb-5 blog-detail">
 
-        <article class="col-md-12">
-            <h2 class="mb-2">{{post.title |title}}</h2>
+        <article class="col-md-12  px-4">
+            <h2 class="mb-2 fs-4">{{post.title |title}}</h2>
             <small>{{ post.date_created | date:'d'}} {{ post.date_created | date:'F'}}
                 {{post.date_created|date:'Y'}}</small>
             <img src="{{post.cover_image.url}}" alt="" class="cover-image">
-            <div class="post-content row pt-4">
-                <div class="author-bio p-4 col-md-4 ">
-                    <div class="avatar bg-dark mb-4"><img src="{{post.user.profile_pic.url}}" alt=""></div>
+            <div class="post-content row pt-4 ">
+                <div class="author-bio p-4 col-md-4">
+                    <div class="avatar bg-dark mb-4 overflow-hidden"><img src="{{post.user.profile_pic.url}}" alt=""></div>
                     <small class="text-muted">By:</small> <span style="color:#ff436c">{{post.user.username}}</span>
                     <hr>
                     <div class="social-pack">
@@ -21,13 +21,13 @@
                     <p class="pt-4" style="color: #ff436e;font-size:.93rem">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt quis repellendus eum quasi repellat eius alias voluptates voluptate officia odit?</p>
                 </div>
 
-                <div class="text col-md-8">
+                <div class="text col-md-8 ">
                     {{post.post|safe|linebreaks}}
                 </div>
 
             </div>
         </article>
-        <aside class="p-2 row">
+        <aside class="row px-4 mt-4" style="background-color: #fff!important">
             <div class="col-md-4 left">
                 <div class="share-box">
                     <h3>Share On Social Media</h3>
@@ -54,32 +54,33 @@
 
                 </div>
             </div>
-            <div class="adverts-space col-md-8" style="max-height: 400px;">
-                <img class="w-100" src="https://i.pinimg.com/564x/90/c7/a6/90c7a6b46a35e461e63d4ca4bd2dbc82.jpg" alt="">
+            <div class="adverts-space col-md-8 " style="max-height: 400px;">
+                <img class="w-100" src="https://www.contentstadium.com/wp-content/uploads/2022/02/were-hiring-social-media-post-examples.png" alt="">
 
             </div>
         </aside>
 
     </section>
-    <section class="comments-section  container mb-5">
-        {% if comments %}
-        <h4 class="text-secondary mb-4 " style="overflow:hidden"> <i class="bi bi-chat-square"></i> Comments {{comments|length}}
-        </h4>
+    <section class="comments-section   container mb-5">
         <div class="row">
-            <div class="col-md-6">
+            {% if comments %}
+            <div class="col-md">
+                <h4 class="text-secondary mb-4 " style="overflow:hidden"> <i class="bi bi-chat-square"></i> Comments {{comments|length}}
+                </h4>
                 {% for comment in comments %}
                 <div class="comment m-2">
-                    <div class="avatar bg-dark"><img src="{{comment.user.profile_pic.url}}" alt=""></div>
+                    <div class="avatar border overflow-hidden"><img src="{{comment.user.profile_pic.url}}" alt=""></div>
                     <div class="left ">
                         <div><strong>{{comment.user}}</strong><small> {{comment.date_created|timesince}}
-                            ago</small></div>
+                                ago</small></div>
                         <p>{{comment.comment}}</p>
                     </div>
                 </div>
-                {% endfor %} {% endif %}
-            </div>
-            <div class="col-md-6">
+                {% endfor %}
+            </div> {% endif %}
+            <div class="col-md">
                 <h5 class="text-secondary ">Leave a comment</h5>
+                {% include "../components/message.html"%}
                 <form method="post">
                     {%csrf_token%} {{form.comment}}
                     <br>
@@ -87,6 +88,8 @@
                 </form>
             </div>
         </div>
+
+
     </section>
 </div>
 {% endblock content %}

@@ -5,11 +5,9 @@
     </div>
     <div class="offcanvas-body">
         {% if notifications %} {% for n in notifications %}
-
-
         <div class="alert border alert-dismissible fade show" role="alert">
             <small>{{n.information}}</small>
-            <small type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></small>
+            <a href="{%url 'remove_notification' n.id%}" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></a>
         </div>
 
         {% endfor %} {% else %} No New Notifications {% endif %}
