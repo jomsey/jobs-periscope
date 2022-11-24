@@ -20,5 +20,5 @@ urlpatterns = [
     path("remove/<int:notification_id>",views.RemoveNotificationView.as_view(),name="remove_notification"),
 ] 
 
-if settings.DEBUG:
-    urlpatterns+=static(settings.MEDIA_URL,document_root =settings.MEDIA_ROOT)
+# if settings.DEBUG:
+urlpatterns+=static(settings.MEDIA_URL,document_root =settings.MEDIA_ROOT)
