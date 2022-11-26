@@ -6,10 +6,11 @@
             <h2 class="mb-2 fs-4">{{post.title |title}}</h2>
             <small>{{ post.date_created | date:'d'}} {{ post.date_created | date:'F'}}
                 {{post.date_created|date:'Y'}}</small>
-            <img src="{{post.cover_image.url}}" alt="" class="cover-image">
+            {% comment %} <img src="{{post.cover_image.url}}" alt="" class="cover-image"> {% endcomment %}
+            <img src="{{post.cover_image}}" alt="" class="cover-image">
             <div class="post-content row pt-4 ">
                 <div class="author-bio p-4 col-md-4">
-                    <div class="avatar bg-dark mb-4 overflow-hidden"><img src="{{post.user.profile_pic.url}}" alt=""></div>
+                    {% comment %} <div class="avatar bg-dark mb-4 overflow-hidden"><img src="{{post.user.profile_pic.url}}" alt=""></div> {% endcomment %}
                     <small class="text-muted">By:</small> <span style="color:#ff436c">{{post.user.username}}</span>
                     <hr>
                     <div class="social-pack">
@@ -43,7 +44,8 @@
                     <a href="{%url 'post_detail' post.id %}" class="text-dark">
                         <div class="aside-article mt-2">
                             <div class="thumbnail">
-                                <img src="{{post.cover_image.url}}" alt="">
+                                {% comment %} <img src="{{post.cover_image.url}}" alt=""> {% endcomment %}
+                                <img src="{{post.cover_image}}" alt="">
                             </div>
                             <div class="m-2 " style="width:200px">
                                 <span class="article-heading">{{post.title}}</span>
@@ -69,7 +71,10 @@
                 </h4>
                 {% for comment in comments %}
                 <div class="comment m-2">
-                    <div class="avatar border overflow-hidden"><img src="{{comment.user.profile_pic.url}}" alt=""></div>
+                    <div class="avatar border overflow-hidden">
+                        {% comment %} <img src="{{comment.user.profile_pic.url}}" alt=""> {% endcomment %}
+                        <img src="https://trednix.com/assets/img/profiles/avatar.png" alt="">
+                    </div>
                     <div class="left ">
                         <div><strong>{{comment.user}}</strong><small> {{comment.date_created|timesince}}
                                 ago</small></div>

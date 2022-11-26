@@ -15,7 +15,8 @@
         <div class="row featured-stories" style="gap:24px">
             {% for post in featured_posts %}
             <div class="card col-md  p-0  ">
-                <img src="{{post.post.cover_image.url}}" alt="" loading="lazy">
+                {% comment %} <img src="{{post.post.cover_image.url}}" alt="" loading="lazy"> {% endcomment %}
+                <img src="{{post.post.cover_image}}" alt="" loading="lazy">
                 <div class="fs-title  position-absolute w-100  bottom-0">
                     <div class="overlay bg-dark"></div>
                     <span class="text-light fs-6  top-50">{{ post.post.title | title}}
@@ -39,7 +40,8 @@
                     {% for post in posts %}
                     <a href="{%url 'post_detail' post.id%}">
                         <div class="card p-0">
-                            <img src="{{post.cover_image.url}}" class="card-img-top " alt="..." style="max-height: 9rem;">
+                            {% comment %} <img src="{{post.cover_image.url}}" class="card-img-top " alt="..." style="max-height: 9rem;"> {% endcomment %}
+                            <img src="{{post.cover_image}}" class="card-img-top " alt="..." style="max-height: 9rem;">
                             <div class="card-body">
                                 <h5 class="fs-6 text-dark">{{ post.title | title}}</h5>
                                 <small class="card-text text-muted ">{{ post.post | capfirst | safe |truncatewords:10}}</small>

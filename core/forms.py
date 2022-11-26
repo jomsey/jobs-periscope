@@ -9,7 +9,7 @@ class PostCommentForm(forms.Form):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model=SiteUser
-        fields=["profile_pic", 'username', 'email','phone_number',  'biography','nationality','birthday']
+        fields=[ 'username', 'email','phone_number',  'biography','nationality','birthday']
         widgets = {
             'profile_pic':forms.FileInput(attrs={'placeholder': 'Username','class':"form-control form-control-input" }),
             'username': forms.TextInput(attrs={'placeholder': 'Username','class':"form-control form-control-input" }),

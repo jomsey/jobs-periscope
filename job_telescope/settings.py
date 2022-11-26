@@ -38,8 +38,9 @@ LOGIN_REDIRECT_URL='profile'
 ACCOUNT_USERNAME_BLACKLIST =["admin"]
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
-ACCOUNT_EMAIL_SUBJECT_PREFIX ="Jobs Periscope"
+ACCOUNT_EMAIL_SUBJECT_PREFIX ="Jobs Telescope "
 ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE =True
+
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
          'google': {
@@ -188,13 +189,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
 # AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
 # AWS_S3_FILE_OVERWRITE = False
+# # AWS_DEFAULT_ACL="public_read"
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+
 
 
 MESSAGE_TAGS = {
-    messages.DEBUG: 'alert-info',
     messages.INFO: 'alert-info',
     messages.SUCCESS: 'alert-success',
     messages.WARNING: 'alert-warning',

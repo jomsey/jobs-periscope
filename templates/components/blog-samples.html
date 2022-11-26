@@ -7,7 +7,8 @@
             {% for post in latest_posts %}
             <div class="card shadow-sm bg-body col-md" style=" padding:0">
                 <div class="card-image " style="height: 12rem">
-                    <img src="{{post.cover_image.url}}" alt="">
+                    {% comment %} <img src="{{post.cover_image.url}}" alt=""> {% endcomment %}
+                    <img src="{{post.cover_image}}" alt="">
                 </div>
                 <div class="card-body ">
                     <h5 class="card-tile post-h">{{ post.title|title }}</h5>

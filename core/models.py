@@ -43,7 +43,8 @@ class JobCategory(models.Model):
         verbose_name_plural = "job_categories"
 
 class Post(models.Model):
-    cover_image = models.ImageField(upload_to="post_covers")
+    # cover_image = models.ImageField(upload_to="post_covers")
+    cover_image = models.URLField(default="https://docs.aws.amazon.com/assets/r/images/aws_logo_dark.png")
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     date_created = models.DateTimeField(auto_now=True)
