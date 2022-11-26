@@ -24,10 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "-$rg$u*+1$^#v!pqhzft7+1l)_3fkk=n*q8@alavd_*o0hv=g$"
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -38,7 +38,8 @@ LOGIN_REDIRECT_URL='profile'
 ACCOUNT_USERNAME_BLACKLIST =["admin"]
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
-
+ACCOUNT_EMAIL_SUBJECT_PREFIX ="Jobs Periscope"
+ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE =True
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
          'google': {
@@ -169,8 +170,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR/'static',]
 MEDIA_URL = 'media/'
+
+STATICFILES_DIRS = [BASE_DIR/'static',]
 MEDIA_ROOT = BASE_DIR/'media'
 STATIC_ROOT =BASE_DIR/"staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
@@ -186,15 +188,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
 # AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
 # AWS_S3_FILE_OVERWRITE = False
-# AWS_DEFAULT_ACL = None
-# AWS_LOCATION = 'static'
-# AWS_S3_REGION_NAME = "us-east-1"  
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# AWS_S3_CUSTOM_DOMAIN = f'{ AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com' 
-# STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/" 
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 
 
 MESSAGE_TAGS = {
