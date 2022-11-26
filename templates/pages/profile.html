@@ -25,7 +25,7 @@
                             <h6 class="text-dark">{{job.title}}</h6>
                             <small class="text-muted">{{job.category}} </small>
                             <br>
-                            <small class="text-muted"><i class="bi bi-geo-alt"></i> Kampala</small>
+                            <small class="text-muted"><i class="bi bi-geo-alt"></i>{{job.job_location}}</small>
                             <br>
                             <small class="mt-4 text-muted"><i class="bi bi-hourglass"></i> Posted
                                 {{job.date_published|timesince}}
@@ -58,4 +58,4 @@
             <strong class="text-muted ">You haven't applied for any Jobs</strong>
         </div>
     </div>
-</div>{% include '../components/edit_job_form.html '%} {% include '../components/edit_profile_form.html '%} {% include '../components/user-notifications.html '%} {% endblock content %}
+</div>{% include '../components/edit_job_form.html'%} {% include '../components/edit_profile_form.html'%} {% include '../components/user-notifications.html '%} {% endblock content %}
