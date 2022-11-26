@@ -126,18 +126,18 @@ WSGI_APPLICATION = 'job_telescope.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': env('DATABASE_NAME'),
+    #     'USER':env('DATABASE_USER'),
+    #     'PORT':5432,
+    #     'PASSWORD':env('DATABASE_PASSWORD'),
+    #     'HOST':env('HOST')
+    # }
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'telescope', 
-        # 'USER': 'telescope_user',
-        # 'PASSWORD': '411uCA3pqwnYvjtNyxTwMCe6Ibeys3cX',
-        # 'HOST': 'postgres://telescope_user:411uCA3pqwnYvjtNyxTwMCe6Ibeys3cX@dpg-cdvoioun6mpu84sfh01g-a/telescope', 
-        # 'PORT': '5432',
     }
-    
 }
 
 
