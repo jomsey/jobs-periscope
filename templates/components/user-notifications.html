@@ -7,7 +7,7 @@
         {% if notifications %} {% for n in notifications %}
         <div class="alert border alert-dismissible fade show" role="alert">
             <small>{{n.information}}</small>
-            <a href="{%url 'remove_notification' n.id%}" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></a>
+            <a href="{%url 'remove_notification' n.id%}" type="button" class="btn-close" ></a>
         </div>
 
         {% endfor %} {% else %} No New Notifications {% endif %}

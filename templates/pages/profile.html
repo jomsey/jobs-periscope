@@ -1,6 +1,6 @@
 {%extends '../base.html'%} {% block title %} jobs for you {% endblock title %} {% block content %}
 <div class="bg-success py-2 px-4 profile-top">
-    <strong style="cursor: pointer;" class="text-light" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">  <i class="bi bi-chat-square fs-4"></i> {{notifications.count}}</strong>
+    <strong style="cursor: pointer;" class="text-light" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">  <i class="bi bi-chat-square fs-4"></i> {% if notifications.count > 0 %}{{notifications.count}}</strong>{% endif %}
     <button class="btn border-light  text-light px-5 " data-bs-toggle="modal" data-bs-target="#add_job">Post A Job</button>
 
 </div>

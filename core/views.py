@@ -191,8 +191,10 @@ class RemoveNotificationView(LoginRequiredMixin,View):
     
     def get(self,request,notification_id):
         notification = get_object_or_404(models.Notification,id=notification_id)
+        print(notification)
         #just remove user from the list of people who were notified
         #cannot delete the notification 'coz could be shared by multiple users
         notification.users.remove(request.user)
+        notification.save()
         return redirect("profile")
         
